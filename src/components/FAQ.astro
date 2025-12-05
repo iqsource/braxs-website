@@ -1,0 +1,156 @@
+---
+import { getTranslations, type Language } from '../i18n/translations';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+---
+
+<section class="faq section" id="faq">
+  <div class="container container--md">
+    <div class="section-header" data-animate="fade-up">
+      <span class="section-label">{t.faq.label}</span>
+      <h2 class="section-title">{t.faq.title}</h2>
+    </div>
+
+    <div class="faq__list" data-animate="fade-up">
+      {t.faq.items.map((item, index) => (
+        <div class="faq__item" data-faq-item>
+          <button
+            class="faq__question"
+            aria-expanded="false"
+            aria-controls={`faq-answer-${index}`}
+          >
+            <span class="faq__question-text">{item.question}</span>
+            <svg class="faq__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m6 9 6 6 6-6"/>
+            </svg>
+          </button>
+          <div class="faq__answer" id={`faq-answer-${index}`} hidden>
+            <p class="faq__answer-text">{item.answer}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  const faqItems = document.querySelectorAll('[data-faq-item]');
+
+  faqItems.forEach(item => {
+    const button = item.querySelector('.faq__question');
+    const answer = item.querySelector('.faq__answer');
+
+    button?.addEventListener('click', () => {
+      const isOpen = item.classList.toggle('is-open');
+      button.setAttribute('aria-expanded', String(isOpen));
+
+      if (answer) {
+        if (isOpen) {
+          answer.removeAttribute('hidden');
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+        } else {
+          answer.style.maxHeight = '0px';
+          setTimeout(() => {
+            answer.setAttribute('hidden', '');
+          }, 400);
+        }
+      }
+
+      // Close other items (accordion behavior)
+      faqItems.forEach(otherItem => {
+        if (otherItem !== item && otherItem.classList.contains('is-open')) {
+          otherItem.classList.remove('is-open');
+          const otherButton = otherItem.querySelector('.faq__question');
+          const otherAnswer = otherItem.querySelector('.faq__answer') as HTMLElement;
+          otherButton?.setAttribute('aria-expanded', 'false');
+          if (otherAnswer) {
+            otherAnswer.style.maxHeight = '0px';
+            setTimeout(() => {
+              otherAnswer.setAttribute('hidden', '');
+            }, 400);
+          }
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .faq {
+    background: var(--bg-secondary);
+  }
+
+  .faq__list {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .faq__item {
+    border-bottom: 1px solid var(--glass-border);
+  }
+
+  .faq__item:last-child {
+    border-bottom: none;
+  }
+
+  .faq__question {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-5) 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .faq__question-text {
+    font-family: var(--font-heading);
+    font-size: var(--text-lg);
+    font-weight: var(--font-semibold);
+    color: var(--text-primary);
+    padding-right: var(--space-4);
+    transition: color var(--duration-fast) var(--ease-smooth);
+  }
+
+  .faq__question:hover .faq__question-text {
+    color: var(--gold-400);
+  }
+
+  .faq__icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    color: var(--gold-400);
+    transition: transform var(--duration-normal) var(--ease-smooth);
+  }
+
+  .faq__item.is-open .faq__icon {
+    transform: rotate(180deg);
+  }
+
+  .faq__answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--duration-slow) var(--ease-smooth);
+  }
+
+  .faq__answer-text {
+    font-size: var(--text-base);
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+    padding-bottom: var(--space-5);
+  }
+
+  @media (max-width: 640px) {
+    .faq__question-text {
+      font-size: var(--text-base);
+    }
+  }
+</style>

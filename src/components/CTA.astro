@@ -1,0 +1,203 @@
+---
+import Button from './ui/Button.astro';
+import { getTranslations, type Language } from '../i18n/translations';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+---
+
+<section class="cta section">
+  <div class="cta__bg">
+    <div class="cta__glow cta__glow--1"></div>
+    <div class="cta__glow cta__glow--2"></div>
+  </div>
+
+  <div class="container">
+    <div class="cta__content" data-animate="scale-up">
+      <h2 class="cta__title">{t.cta.title}</h2>
+      <p class="cta__subtitle">{t.cta.subtitle}</p>
+
+      <Button href="#download-app" variant="primary" size="xl">
+        {t.cta.button}
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14"/>
+          <path d="m12 5 7 7-7 7"/>
+        </svg>
+      </Button>
+
+      <div class="cta__stats">
+        <div class="cta__stat">
+          <span class="cta__stat-value" data-counter="10000">0</span>
+          <span class="cta__stat-suffix">+</span>
+          <span class="cta__stat-label">{t.cta.stats.users}</span>
+        </div>
+        <div class="cta__stat">
+          <span class="cta__stat-value" data-counter="50000">0</span>
+          <span class="cta__stat-suffix">+</span>
+          <span class="cta__stat-label">{t.cta.stats.transactions}</span>
+        </div>
+        <div class="cta__stat">
+          <span class="cta__stat-value" data-counter="15">0</span>
+          <span class="cta__stat-suffix">+</span>
+          <span class="cta__stat-label">{t.cta.stats.countries}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Counter animation
+  function animateCounter(element: HTMLElement, target: number, duration = 2000) {
+    const start = 0;
+    const startTime = performance.now();
+
+    function update(currentTime: number) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+
+      // Ease out quart
+      const easeOut = 1 - Math.pow(1 - progress, 4);
+      const current = Math.floor(start + (target - start) * easeOut);
+
+      element.textContent = current.toLocaleString();
+
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      }
+    }
+
+    requestAnimationFrame(update);
+  }
+
+  // Intersection Observer for counters
+  const counters = document.querySelectorAll('[data-counter]');
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const target = parseInt((entry.target as HTMLElement).dataset.counter || '0');
+        animateCounter(entry.target as HTMLElement, target);
+        counterObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  counters.forEach(counter => counterObserver.observe(counter));
+</script>
+
+<style>
+  .cta {
+    position: relative;
+    background: var(--gradient-gold);
+    overflow: hidden;
+  }
+
+  .cta__bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .cta__glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.3;
+  }
+
+  .cta__glow--1 {
+    top: -20%;
+    right: -10%;
+    width: 400px;
+    height: 400px;
+    background: rgba(255, 255, 255, 0.3);
+    animation: pulse-ring 4s ease infinite;
+  }
+
+  .cta__glow--2 {
+    bottom: -30%;
+    left: -10%;
+    width: 500px;
+    height: 500px;
+    background: rgba(153, 101, 21, 0.4);
+    animation: pulse-ring 5s ease 1s infinite;
+  }
+
+  .cta__content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .cta__title {
+    font-size: var(--text-4xl);
+    font-weight: var(--font-bold);
+    color: var(--dark-900);
+    margin-bottom: var(--space-4);
+  }
+
+  .cta__subtitle {
+    font-size: var(--text-xl);
+    color: var(--dark-700);
+    margin-bottom: var(--space-8);
+  }
+
+  .cta :global(.btn--primary) {
+    background: var(--dark-900);
+    color: var(--gold-400);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .cta :global(.btn--primary:hover) {
+    background: var(--dark-800);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  }
+
+  .cta__stats {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-16);
+    margin-top: var(--space-12);
+    padding-top: var(--space-12);
+    border-top: 1px solid rgba(26, 26, 26, 0.2);
+  }
+
+  .cta__stat {
+    text-align: center;
+  }
+
+  .cta__stat-value {
+    font-family: var(--font-mono);
+    font-size: var(--text-4xl);
+    font-weight: var(--font-bold);
+    color: var(--dark-900);
+    display: inline;
+  }
+
+  .cta__stat-suffix {
+    font-family: var(--font-mono);
+    font-size: var(--text-2xl);
+    font-weight: var(--font-bold);
+    color: var(--dark-900);
+  }
+
+  .cta__stat-label {
+    display: block;
+    font-size: var(--text-sm);
+    color: var(--dark-700);
+    margin-top: var(--space-2);
+  }
+
+  @media (max-width: 768px) {
+    .cta__stats {
+      flex-direction: column;
+      gap: var(--space-8);
+    }
+  }
+</style>

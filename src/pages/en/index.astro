@@ -1,0 +1,40 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navigation from '../../components/Navigation.astro';
+import Hero from '../../components/Hero.astro';
+import Benefits from '../../components/Benefits.astro';
+import AboutUs from '../../components/AboutUs.astro';
+import Services from '../../components/Services.astro';
+import CTA from '../../components/CTA.astro';
+import Security from '../../components/Security.astro';
+import HowItWorks from '../../components/HowItWorks.astro';
+import Testimonials from '../../components/Testimonials.astro';
+import FAQ from '../../components/FAQ.astro';
+import DownloadApp from '../../components/DownloadApp.astro';
+import Footer from '../../components/Footer.astro';
+
+const lang = 'en';
+---
+
+<Layout
+  title="Braxs Global - Your account and card in one place"
+  description="Braxs Global is a modern fintech that issues cards and manages digital accounts. No lines, no paperwork, no bureaucracy. You control everything from the app."
+  lang={lang}
+>
+  <Navigation lang={lang} />
+
+  <main id="main-content">
+    <Hero lang={lang} />
+    <Benefits lang={lang} />
+    <AboutUs lang={lang} />
+    <Services lang={lang} />
+    <CTA lang={lang} />
+    <Security lang={lang} />
+    <HowItWorks lang={lang} />
+    <Testimonials lang={lang} />
+    <FAQ lang={lang} />
+    <DownloadApp lang={lang} />
+  </main>
+
+  <Footer lang={lang} />
+</Layout>

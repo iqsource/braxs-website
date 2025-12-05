@@ -1,0 +1,241 @@
+---
+import { getTranslations, type Language } from '../i18n/translations';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+
+const icons = [
+  // Lock
+  `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`,
+  // Key
+  `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></svg>`,
+  // Fingerprint
+  `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12C2 6.5 6.5 2 12 2a10 10 0 0 1 8 4"/><path d="M5 19.5C5.5 18 6 15 6 12c0-.7.12-1.37.34-2"/><path d="M17.29 21.02c.12-.6.43-2.3.5-3.02"/><path d="M12 10a2 2 0 0 0-2 2c0 1.02-.1 2.51-.26 4"/><path d="M8.65 22c.21-.66.45-1.32.57-2"/><path d="M14 13.12c0 2.38 0 6.38-1 8.88"/><path d="M2 16h.01"/><path d="M21.8 16c.2-2 .131-5.354 0-6"/><path d="M9 6.8a6 6 0 0 1 9 5.2c0 .47 0 1.17-.02 2"/></svg>`,
+  // Bell
+  `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>`,
+];
+---
+
+<section class="security section" id="security">
+  <div class="container">
+    <div class="security__container">
+      <div class="security__content" data-animate="fade-right">
+        <span class="section-label">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/>
+          </svg>
+          {t.security.label}
+        </span>
+        <h2 class="section-title">{t.security.title}</h2>
+        <p class="security__desc">{t.security.description}</p>
+
+        <div class="security__features">
+          {t.security.features.map((feature, index) => (
+            <div class="security__feature">
+              <div class="security__feature-icon" set:html={icons[index]} />
+              <div>
+                <h4 class="security__feature-title">{feature.title}</h4>
+                <p class="security__feature-desc">{feature.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="security__visual" data-animate="fade-left">
+        <div class="security__shield">
+          <svg class="shield-icon" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+
+          <!-- Floating security badges -->
+          <div class="security__badge security__badge--1 animate-float-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            <span>256-bit SSL</span>
+          </div>
+
+          <div class="security__badge security__badge--2 animate-float-badge" style="animation-delay: 0.5s;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            <span>PCI DSS</span>
+          </div>
+
+          <div class="security__badge security__badge--3 animate-float-badge" style="animation-delay: 1s;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            <span>24/7</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .security {
+    background: var(--bg-secondary);
+  }
+
+  .security__container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-16);
+    align-items: center;
+  }
+
+  .security__content {
+    padding-right: var(--space-8);
+  }
+
+  .security .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--success);
+  }
+
+  .security .section-label svg {
+    color: var(--success);
+  }
+
+  .security__desc {
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-8);
+  }
+
+  .security__features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-6);
+  }
+
+  .security__feature {
+    display: flex;
+    gap: var(--space-3);
+    align-items: flex-start;
+  }
+
+  .security__feature-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(16, 185, 129, 0.1);
+    border-radius: var(--radius-lg);
+    color: var(--success);
+  }
+
+  .security__feature-title {
+    font-size: var(--text-base);
+    font-weight: var(--font-semibold);
+    margin-bottom: var(--space-1);
+  }
+
+  .security__feature-desc {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    line-height: var(--leading-relaxed);
+  }
+
+  .security__visual {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+  }
+
+  .security__shield {
+    position: relative;
+  }
+
+  .shield-icon {
+    color: var(--gold-400);
+    filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.3));
+    animation: float 6s var(--ease-smooth) infinite;
+  }
+
+  .security__badge {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    background: var(--bg-primary);
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-lg);
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+  }
+
+  .security__badge svg {
+    color: var(--success);
+  }
+
+  .security__badge--1 {
+    top: 10%;
+    left: -20%;
+  }
+
+  .security__badge--2 {
+    top: 50%;
+    right: -30%;
+  }
+
+  .security__badge--3 {
+    bottom: 10%;
+    left: -10%;
+  }
+
+  @media (max-width: 1024px) {
+    .security__container {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+
+    .security__content {
+      padding-right: 0;
+    }
+
+    .security__features {
+      justify-items: center;
+    }
+
+    .security__feature {
+      max-width: 280px;
+      text-align: left;
+    }
+
+    .security__visual {
+      order: -1;
+      min-height: 300px;
+    }
+
+    .security__badge {
+      display: none;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .security__features {
+      grid-template-columns: 1fr;
+    }
+
+    .security__feature {
+      max-width: 100%;
+    }
+  }
+</style>

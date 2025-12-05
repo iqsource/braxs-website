@@ -1,0 +1,112 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  lang?: 'es' | 'en';
+}
+
+const {
+  title,
+  description = 'Braxs Global - Tu cuenta y tarjeta en un solo lugar. Fintech moderna para clientes directos.',
+  lang = 'es'
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const alternateES = new URL('/es/', Astro.site);
+const alternateEN = new URL('/en/', Astro.site);
+---
+
+<!doctype html>
+<html lang={lang} class="js-enabled">
+  <head>
+    <!-- Add js-enabled class immediately for animations -->
+    <script is:inline>document.documentElement.classList.add('js-enabled');</script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Canonical & Alternates -->
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="alternate" hreflang="es" href={alternateES} />
+    <link rel="alternate" hreflang="en" href={alternateEN} />
+    <link rel="alternate" hreflang="x-default" href={alternateES} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL('/og-image.png', Astro.site)} />
+    <meta property="og:locale" content={lang === 'es' ? 'es_CR' : 'en_US'} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL('/og-image.png', Astro.site)} />
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#1A1A1A" />
+
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <title>{title}</title>
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">
+      {lang === 'es' ? 'Saltar al contenido' : 'Skip to content'}
+    </a>
+
+    <slot />
+
+    <script>
+      // Scroll Animation Observer
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px 0px -100px 0px',
+        threshold: 0.1
+      };
+
+      const animationObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          }
+        });
+      }, observerOptions);
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const animatedElements = document.querySelectorAll('[data-animate]');
+        animatedElements.forEach(el => animationObserver.observe(el));
+      });
+
+      // Language detection and redirect for root
+      if (window.location.pathname === '/') {
+        const browserLang = navigator.language.split('-')[0];
+        const targetLang = browserLang === 'en' ? 'en' : 'es';
+        window.location.replace(`/${targetLang}/`);
+      }
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  /* Ensure smooth page load */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Main content focus */
+  #main-content:focus {
+    outline: none;
+  }
+</style>

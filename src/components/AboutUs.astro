@@ -1,0 +1,168 @@
+---
+import { getTranslations, type Language } from '../i18n/translations';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+---
+
+<section class="about section" id="about">
+  <div class="container">
+    <div class="about__container">
+      <div class="about__content" data-animate="fade-right">
+        <span class="section-label">{t.about.label}</span>
+        <h2 class="section-title">{t.about.title}</h2>
+        <p class="about__desc">{t.about.description}</p>
+
+        <div class="about__badges">
+          <div class="trust-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/>
+              <path d="m9 12 2 2 4-4"/>
+            </svg>
+            <span>{lang === 'es' ? '100% Seguro' : '100% Secure'}</span>
+          </div>
+          <div class="trust-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/>
+            </svg>
+            <span>{lang === 'es' ? 'Ultra Rapido' : 'Ultra Fast'}</span>
+          </div>
+          <div class="trust-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect width="20" height="14" x="2" y="5" rx="2"/>
+              <line x1="2" x2="22" y1="10" y2="10"/>
+            </svg>
+            <span>Mastercard</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="about__visual" data-animate="fade-left">
+        <div class="about__image-wrapper">
+          <img
+            src="/images/about-visual.png"
+            alt="Braxs Global App"
+            width="500"
+            height="400"
+            loading="lazy"
+          />
+          <div class="about__glow"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    background: var(--bg-primary);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about__container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-16);
+    align-items: center;
+  }
+
+  .about__content {
+    padding-right: var(--space-8);
+  }
+
+  .about__desc {
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-8);
+  }
+
+  .about__badges {
+    display: flex;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+
+  .trust-badge {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    background: var(--bg-secondary);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-full);
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    color: var(--text-primary);
+    transition: all var(--duration-normal) var(--ease-smooth);
+  }
+
+  .trust-badge:hover {
+    border-color: var(--glass-border-gold);
+    background: rgba(212, 175, 55, 0.1);
+  }
+
+  .trust-badge svg {
+    color: var(--gold-400);
+  }
+
+  .about__visual {
+    position: relative;
+  }
+
+  .about__image-wrapper {
+    position: relative;
+  }
+
+  .about__image-wrapper img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-2xl);
+  }
+
+  .about__glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.2) 0%, transparent 70%);
+    filter: blur(60px);
+    z-index: -1;
+  }
+
+  @media (max-width: 1024px) {
+    .about__container {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+
+    .about__content {
+      padding-right: 0;
+    }
+
+    .about__badges {
+      justify-content: center;
+    }
+
+    .about__visual {
+      order: -1;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .about__badges {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+</style>

@@ -1,0 +1,170 @@
+---
+import { getTranslations, type Language } from '../i18n/translations';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+---
+
+<section class="testimonials section" id="testimonials">
+  <div class="container">
+    <div class="section-header" data-animate="fade-up">
+      <span class="section-label">{t.testimonials.label}</span>
+      <h2 class="section-title">{t.testimonials.title}</h2>
+    </div>
+
+    <div class="testimonials__grid" data-animate="stagger">
+      {t.testimonials.items.map((testimonial, index) => (
+        <div class="testimonial-card glass">
+          <div class="testimonial-card__quote">"</div>
+          <blockquote class="testimonial-card__text">
+            {testimonial.quote}
+          </blockquote>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar">
+              <span>{testimonial.author.charAt(0)}</span>
+            </div>
+            <div>
+              <cite class="testimonial-card__name">{testimonial.author}</cite>
+              <span class="testimonial-card__role">{testimonial.role}</span>
+            </div>
+          </div>
+          <div class="testimonial-card__stars">
+            {[...Array(5)].map(() => (
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonials {
+    background: var(--dark-950);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .testimonials::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 50%, rgba(201, 162, 39, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .testimonials__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-8);
+    position: relative;
+    z-index: 1;
+  }
+
+  .testimonial-card {
+    position: relative;
+    padding: var(--space-8);
+    border-radius: var(--radius-2xl);
+    transition: all var(--duration-slow) var(--ease-smooth);
+  }
+
+  .testimonial-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--glass-border-gold);
+    box-shadow: var(--shadow-xl), var(--glow-gold-sm);
+  }
+
+  .testimonial-card__quote {
+    position: absolute;
+    top: var(--space-4);
+    left: var(--space-6);
+    font-size: 80px;
+    font-family: serif;
+    color: var(--gold-400);
+    opacity: 0.2;
+    line-height: 1;
+  }
+
+  .testimonial-card__text {
+    font-size: var(--text-lg);
+    color: var(--text-primary);
+    line-height: var(--leading-relaxed);
+    font-style: italic;
+    margin: 0 0 var(--space-6);
+    position: relative;
+    z-index: 1;
+  }
+
+  .testimonial-card__author {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+  }
+
+  .testimonial-card__avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-full);
+    background: var(--gradient-gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: var(--font-bold);
+    color: var(--dark-900);
+    font-size: var(--text-lg);
+  }
+
+  .testimonial-card__name {
+    display: block;
+    font-weight: var(--font-semibold);
+    font-style: normal;
+    color: var(--text-primary);
+  }
+
+  .testimonial-card__role {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+  }
+
+  .testimonial-card__stars {
+    display: flex;
+    gap: var(--space-1);
+    color: var(--gold-400);
+  }
+
+  @media (max-width: 1024px) {
+    .testimonials__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .testimonials__grid > :last-child {
+      grid-column: span 2;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .testimonials__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .testimonials__grid > :last-child {
+      grid-column: span 1;
+      max-width: 100%;
+    }
+  }
+</style>

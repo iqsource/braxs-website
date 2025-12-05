@@ -1,0 +1,140 @@
+---
+import { getTranslations, type Language } from '../i18n/translations';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+
+const icons = [
+  // Card
+  `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>`,
+  // Bank
+  `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/><path d="M9 9v.01"/><path d="M9 12v.01"/><path d="M9 15v.01"/><path d="M9 18v.01"/></svg>`,
+  // Piggy bank
+  `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 5c-1.5 0-2.8 1.4-3 2-3.5-1.5-11-.3-11 5 0 1.8 0 3 2 4.5V20h4v-2h3v2h4v-4c1-.5 1.7-1 2-2h2v-4h-2c0-1-.5-1.5-1-2V5z"/><path d="M2 9v1c0 1.1.9 2 2 2h1"/><path d="M16 11h.01"/></svg>`,
+  // Arrows
+  `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m16 3 4 4-4 4"/><path d="M20 7H4"/><path d="m8 21-4-4 4-4"/><path d="M4 17h16"/></svg>`,
+];
+---
+
+<section class="services section gradient-mesh" id="services">
+  <div class="container">
+    <div class="section-header" data-animate="fade-up">
+      <span class="section-label">{t.services.label}</span>
+      <h2 class="section-title">{t.services.title}</h2>
+    </div>
+
+    <div class="services__grid" data-animate="stagger">
+      {t.services.items.map((item, index) => (
+        <div class="service-card glass-gold shimmer">
+          <div class="service-card__icon" set:html={icons[index]} />
+          <h3 class="service-card__title">{item.title}</h3>
+          <p class="service-card__subtitle">{item.subtitle}</p>
+          <ul class="service-card__features">
+            {item.features.map((feature) => (
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                <span>{feature}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .services {
+    background: var(--dark-950);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .services__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-6);
+  }
+
+  .service-card {
+    position: relative;
+    padding: var(--space-6);
+    border-radius: var(--radius-2xl);
+    transition: all var(--duration-slow) var(--ease-smooth);
+    overflow: hidden;
+  }
+
+  .service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), var(--glow-gold-sm);
+  }
+
+  .service-card__icon {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(212, 175, 55, 0.15);
+    border-radius: var(--radius-xl);
+    color: var(--gold-400);
+    margin-bottom: var(--space-4);
+    transition: all var(--duration-slow) var(--ease-smooth);
+  }
+
+  .service-card:hover .service-card__icon {
+    background: var(--gradient-gold);
+    color: var(--dark-900);
+    transform: scale(1.1);
+  }
+
+  .service-card__title {
+    font-size: var(--text-lg);
+    font-weight: var(--font-semibold);
+    margin-bottom: var(--space-1);
+  }
+
+  .service-card__subtitle {
+    font-size: var(--text-sm);
+    color: var(--gold-400);
+    margin-bottom: var(--space-4);
+  }
+
+  .service-card__features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .service-card__features li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-2);
+  }
+
+  .service-card__features svg {
+    color: var(--success);
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 1200px) {
+    .services__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .services__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

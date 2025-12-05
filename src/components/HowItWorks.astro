@@ -1,0 +1,164 @@
+---
+import Button from './ui/Button.astro';
+import { getTranslations, type Language } from '../i18n/translations';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+
+const icons = [
+  // Download
+  `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>`,
+  // User check
+  `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg>`,
+  // Credit card
+  `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>`,
+  // Rocket
+  `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>`,
+];
+---
+
+<section class="how-it-works section" id="how-it-works">
+  <div class="container">
+    <div class="section-header" data-animate="fade-up">
+      <span class="section-label">{t.howItWorks.label}</span>
+      <h2 class="section-title">{t.howItWorks.title}</h2>
+    </div>
+
+    <div class="steps" data-animate="stagger">
+      {t.howItWorks.steps.map((step, index) => (
+        <div class="step">
+          <div class="step__number">
+            <span>{step.number}</span>
+            <div class="step__icon" set:html={icons[index]} />
+          </div>
+          <h3 class="step__title">{step.title}</h3>
+          <p class="step__desc">{step.description}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="how-it-works__cta" data-animate="fade-up">
+      <Button href="#download-app" variant="primary" size="lg">
+        {t.howItWorks.cta}
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" x2="12" y1="15" y2="3"/>
+        </svg>
+      </Button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .how-it-works {
+    background: var(--bg-primary);
+  }
+
+  .steps {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin-bottom: var(--space-16);
+  }
+
+  /* Connection Line */
+  .steps::before {
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 80px;
+    right: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold-500) 0%, var(--gold-400) 100%);
+    z-index: 0;
+  }
+
+  .step {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    max-width: 220px;
+    text-align: center;
+  }
+
+  .step__number {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto var(--space-6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-secondary);
+    border: 3px solid var(--gold-500);
+    border-radius: var(--radius-full);
+    font-family: var(--font-heading);
+    font-size: var(--text-2xl);
+    font-weight: var(--font-bold);
+    color: var(--gold-400);
+    position: relative;
+    transition: all var(--duration-slow) var(--ease-smooth);
+  }
+
+  .step__number span {
+    transition: opacity var(--duration-normal) var(--ease-smooth);
+  }
+
+  .step__icon {
+    position: absolute;
+    opacity: 0;
+    color: var(--dark-900);
+    transition: opacity var(--duration-normal) var(--ease-smooth);
+  }
+
+  .step:hover .step__number {
+    background: var(--gradient-gold);
+    border-color: transparent;
+    transform: scale(1.1);
+    box-shadow: var(--glow-gold);
+  }
+
+  .step:hover .step__number span {
+    opacity: 0;
+  }
+
+  .step:hover .step__icon {
+    opacity: 1;
+  }
+
+  .step__title {
+    font-size: var(--text-lg);
+    font-weight: var(--font-semibold);
+    margin-bottom: var(--space-2);
+  }
+
+  .step__desc {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+  }
+
+  .how-it-works__cta {
+    text-align: center;
+  }
+
+  @media (max-width: 1024px) {
+    .steps {
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-10);
+    }
+
+    .steps::before {
+      display: none;
+    }
+
+    .step {
+      max-width: 100%;
+    }
+  }
+</style>

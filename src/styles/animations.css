@@ -1,0 +1,328 @@
+/* ========================================
+   BRAXS GLOBAL - ANIMATIONS
+   ======================================== */
+
+/* ===== KEYFRAMES ===== */
+
+/* Float Animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-10px) rotate(0.5deg);
+  }
+  75% {
+    transform: translateY(-5px) rotate(-0.5deg);
+  }
+}
+
+/* Float Badge */
+@keyframes float-badge {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+/* Gradient Shift */
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Glow Pulse */
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(212, 175, 55, 0.5);
+  }
+}
+
+/* Shimmer */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Bounce Soft */
+@keyframes bounce-soft {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+/* Scroll Dot */
+@keyframes scroll-dot {
+  0%, 100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    opacity: 0.3;
+    transform: translateX(-50%) translateY(12px);
+  }
+}
+
+/* Pulse Ring */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* Spin */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Fade In */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== SCROLL-TRIGGERED ANIMATIONS ===== */
+
+/* Base state for animated elements - visible by default for no-JS fallback */
+[data-animate] {
+  opacity: 1;
+  transition:
+    opacity 0.6s var(--ease-smooth-out),
+    transform 0.6s var(--ease-smooth-out);
+}
+
+/* When JS is enabled, hide elements initially for animation */
+.js-enabled [data-animate] {
+  opacity: 0;
+}
+
+.js-enabled [data-animate].is-visible {
+  opacity: 1;
+}
+
+/* Fade Up */
+.js-enabled [data-animate="fade-up"] {
+  transform: translateY(40px);
+}
+
+.js-enabled [data-animate="fade-up"].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Fade Down */
+.js-enabled [data-animate="fade-down"] {
+  transform: translateY(-40px);
+}
+
+.js-enabled [data-animate="fade-down"].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Fade Left */
+.js-enabled [data-animate="fade-left"] {
+  transform: translateX(40px);
+}
+
+.js-enabled [data-animate="fade-left"].is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Fade Right */
+.js-enabled [data-animate="fade-right"] {
+  transform: translateX(-40px);
+}
+
+.js-enabled [data-animate="fade-right"].is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Scale Up */
+.js-enabled [data-animate="scale-up"] {
+  transform: scale(0.9);
+}
+
+.js-enabled [data-animate="scale-up"].is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Blur In */
+.js-enabled [data-animate="blur-in"] {
+  filter: blur(10px);
+  transform: scale(1.05);
+}
+
+.js-enabled [data-animate="blur-in"].is-visible {
+  opacity: 1;
+  filter: blur(0);
+  transform: scale(1);
+}
+
+/* Stagger Children */
+.js-enabled [data-animate="stagger"] > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.4s var(--ease-smooth-out),
+    transform 0.4s var(--ease-smooth-out);
+}
+
+.js-enabled [data-animate="stagger"].is-visible > *:nth-child(1) { transition-delay: 0ms; }
+.js-enabled [data-animate="stagger"].is-visible > *:nth-child(2) { transition-delay: 100ms; }
+.js-enabled [data-animate="stagger"].is-visible > *:nth-child(3) { transition-delay: 200ms; }
+.js-enabled [data-animate="stagger"].is-visible > *:nth-child(4) { transition-delay: 300ms; }
+.js-enabled [data-animate="stagger"].is-visible > *:nth-child(5) { transition-delay: 400ms; }
+.js-enabled [data-animate="stagger"].is-visible > *:nth-child(6) { transition-delay: 500ms; }
+
+.js-enabled [data-animate="stagger"].is-visible > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Delay Utilities */
+[data-delay="100"] { transition-delay: 100ms !important; }
+[data-delay="200"] { transition-delay: 200ms !important; }
+[data-delay="300"] { transition-delay: 300ms !important; }
+[data-delay="400"] { transition-delay: 400ms !important; }
+[data-delay="500"] { transition-delay: 500ms !important; }
+
+/* ===== COMPONENT ANIMATIONS ===== */
+
+/* Float */
+.animate-float {
+  animation: float 6s var(--ease-smooth) infinite;
+}
+
+.animate-float-delayed {
+  animation: float 6s var(--ease-smooth) 1s infinite;
+}
+
+/* Float Badge */
+.animate-float-badge {
+  animation: float-badge 5s var(--ease-smooth) infinite;
+}
+
+/* Glow Pulse */
+.animate-glow {
+  animation: glow-pulse 2s var(--ease-smooth) infinite;
+}
+
+/* Gradient Animation */
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+/* Shimmer Effect */
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  animation: shimmer 2s infinite;
+}
+
+/* Bounce */
+.animate-bounce {
+  animation: bounce-soft 2s var(--ease-smooth) infinite;
+}
+
+/* ===== HOVER TRANSITIONS ===== */
+
+/* Lift on hover */
+.hover-lift {
+  transition: transform var(--duration-normal) var(--ease-smooth);
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+}
+
+/* Scale on hover */
+.hover-scale {
+  transition: transform var(--duration-normal) var(--ease-smooth);
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+/* Glow on hover */
+.hover-glow {
+  transition: box-shadow var(--duration-normal) var(--ease-smooth);
+}
+
+.hover-glow:hover {
+  box-shadow: var(--glow-gold);
+}
+
+/* ===== REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  [data-animate] {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+
+  [data-animate="stagger"] > * {
+    opacity: 1;
+    transform: none;
+  }
+}

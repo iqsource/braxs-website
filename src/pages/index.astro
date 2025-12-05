@@ -1,0 +1,21 @@
+---
+// Root index - redirects to language-specific page based on browser preference
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Braxs Global - Redirecting...</title>
+    <script is:inline>
+      // Detect browser language and redirect
+      const browserLang = navigator.language.split('-')[0];
+      const targetLang = browserLang === 'en' ? 'en' : 'es';
+      window.location.replace(`/${targetLang}/`);
+    </script>
+    <meta http-equiv="refresh" content="0;url=/es/" />
+  </head>
+  <body>
+    <p>Redirecting...</p>
+  </body>
+</html>

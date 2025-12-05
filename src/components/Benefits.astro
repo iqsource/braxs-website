@@ -1,0 +1,120 @@
+---
+import { getTranslations, type Language } from '../i18n/translations';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+
+const icons = [
+  // Card icon
+  `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>`,
+  // Wallet icon
+  `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></svg>`,
+  // Target icon
+  `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>`,
+];
+---
+
+<section class="benefits section" id="benefits">
+  <div class="container">
+    <div class="section-header" data-animate="fade-up">
+      <span class="section-label">{t.benefits.label}</span>
+      <h2 class="section-title">{t.benefits.title}</h2>
+    </div>
+
+    <div class="benefits__grid" data-animate="stagger">
+      {t.benefits.items.map((item, index) => (
+        <div class="benefit-card">
+          <div class="benefit-card__icon" set:html={icons[index]} />
+          <h3 class="benefit-card__title">{item.title}</h3>
+          <p class="benefit-card__desc">{item.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .benefits {
+    background: var(--bg-secondary);
+  }
+
+  .benefits__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-8);
+  }
+
+  .benefit-card {
+    position: relative;
+    padding: var(--space-8);
+    background: var(--bg-primary);
+    border-radius: var(--radius-2xl);
+    border: 1px solid var(--glass-border);
+    text-align: center;
+    transition: all var(--duration-slow) var(--ease-smooth);
+  }
+
+  .benefit-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--glass-border-gold);
+    box-shadow: var(--shadow-xl), var(--glow-gold-sm);
+  }
+
+  .benefit-card__icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto var(--space-6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(153, 101, 21, 0.05) 100%);
+    border-radius: var(--radius-2xl);
+    color: var(--gold-400);
+    transition: all var(--duration-slow) var(--ease-smooth);
+  }
+
+  .benefit-card:hover .benefit-card__icon {
+    background: var(--gradient-gold);
+    color: var(--dark-900);
+    transform: scale(1.1) rotate(5deg);
+  }
+
+  .benefit-card__title {
+    font-size: var(--text-xl);
+    font-weight: var(--font-semibold);
+    margin-bottom: var(--space-3);
+  }
+
+  .benefit-card__desc {
+    font-size: var(--text-base);
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+  }
+
+  @media (max-width: 1024px) {
+    .benefits__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .benefits__grid > :last-child {
+      grid-column: span 2;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .benefits__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .benefits__grid > :last-child {
+      grid-column: span 1;
+      max-width: 100%;
+    }
+  }
+</style>
