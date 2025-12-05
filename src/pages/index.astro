@@ -1,21 +1,20 @@
 ---
-// Root index - redirects to language-specific page based on browser preference
+// Root index - instant redirect to language-specific page based on browser preference
+// No visible content - redirect happens immediately
 ---
 
+<!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Braxs Global - Redirecting...</title>
-    <script is:inline>
-      // Detect browser language and redirect
-      const browserLang = navigator.language.split('-')[0];
-      const targetLang = browserLang === 'en' ? 'en' : 'es';
-      window.location.replace(`/${targetLang}/`);
-    </script>
     <meta http-equiv="refresh" content="0;url=/es/" />
+    <script is:inline>
+      (function() {
+        var lang = (navigator.language || '').split('-')[0];
+        window.location.replace('/' + (lang === 'en' ? 'en' : 'es') + '/');
+      })();
+    </script>
+    <title>Braxs Global</title>
   </head>
-  <body>
-    <p>Redirecting...</p>
-  </body>
+  <body></body>
 </html>
