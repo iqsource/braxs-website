@@ -40,19 +40,6 @@ const t = getTranslations(lang);
           </div>
         </div>
       </div>
-
-      <div class="about__visual" data-animate="fade-left">
-        <div class="about__image-wrapper">
-          <img
-            src="/images/about-visual.png"
-            alt="Braxs Global App"
-            width="500"
-            height="400"
-            loading="lazy"
-          />
-          <div class="about__glow"></div>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -65,14 +52,13 @@ const t = getTranslations(lang);
   }
 
   .about__container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-16);
-    align-items: center;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
   }
 
   .about__content {
-    padding-right: var(--space-8);
+    padding: 0;
   }
 
   .about__desc {
@@ -111,52 +97,8 @@ const t = getTranslations(lang);
     color: var(--gold-400);
   }
 
-  .about__visual {
-    position: relative;
-  }
-
-  .about__image-wrapper {
-    position: relative;
-  }
-
-  .about__image-wrapper img {
-    width: 100%;
-    height: auto;
-    border-radius: var(--radius-2xl);
-    box-shadow: var(--shadow-2xl);
-  }
-
-  .about__glow {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80%;
-    height: 80%;
-    background: radial-gradient(circle, rgba(212, 175, 55, 0.2) 0%, transparent 70%);
-    filter: blur(60px);
-    z-index: -1;
-  }
-
-  @media (max-width: 1024px) {
-    .about__container {
-      grid-template-columns: 1fr;
-      text-align: center;
-    }
-
-    .about__content {
-      padding-right: 0;
-    }
-
-    .about__badges {
-      justify-content: center;
-    }
-
-    .about__visual {
-      order: -1;
-      max-width: 500px;
-      margin: 0 auto;
-    }
+  .about__badges {
+    justify-content: center;
   }
 
   @media (max-width: 640px) {
