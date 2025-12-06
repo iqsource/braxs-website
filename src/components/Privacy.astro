@@ -1,0 +1,82 @@
+---
+import { getTranslations, type Language } from '../i18n/translations';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+---
+
+<section class="privacy section" id="privacy">
+  <div class="container">
+    <div class="privacy__container">
+      <div class="privacy__content" data-animate="fade-up">
+        <span class="section-label">{t.privacy.label}</span>
+        <h2 class="section-title">{t.privacy.title}</h2>
+        <p class="privacy__subtitle">{t.privacy.subtitle}</p>
+
+        <div class="privacy__text">
+          <p>{t.privacy.paragraph1}</p>
+          <p>{t.privacy.paragraph2}</p>
+          <p>{t.privacy.paragraph3}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .privacy {
+    background: var(--bg-secondary);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .privacy__container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .privacy__content {
+    padding: 0;
+  }
+
+  .privacy__subtitle {
+    font-size: var(--text-lg);
+    font-weight: var(--font-semibold);
+    color: var(--gold-400);
+    margin-bottom: var(--space-6);
+  }
+
+  .privacy__text {
+    text-align: left;
+    background: var(--bg-primary);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-8);
+  }
+
+  .privacy__text p {
+    font-size: var(--text-base);
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-4);
+  }
+
+  .privacy__text p:last-child {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 640px) {
+    .privacy__text {
+      padding: var(--space-6);
+    }
+
+    .privacy__text p {
+      font-size: var(--text-sm);
+    }
+  }
+</style>

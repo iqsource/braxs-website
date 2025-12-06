@@ -50,6 +50,7 @@ export const translations = {
       label: 'Quiénes Somos',
       title: 'Una plataforma financiera hecha para ti',
       description: 'Braxs Global es una fintech moderna que emite tarjetas y administra cuentas digitales para clientes directos. Sin filas, sin trámites, sin burocracia. Operamos tu dinero con seguridad, rapidez y tecnología de punta. Tú controlas todo desde tu app Braxs.',
+      legal: 'Braxs Global Consulting SRL, cédula jurídica 3-102-841401, es una fintech costarricense que ofrece servicios de cuentas de pago y tarjetas prepagadas. Si bien la empresa no se encuentra inscrita ante la Superintendencia General de Entidades Financieras (SUGEF), realiza esfuerzos continuos para cumplir con las mejores prácticas del sector financiero. Braxs no constituye una entidad bancaria supervisada, ni ofrece garantía estatal sobre los fondos depositados.',
     },
 
     // Services Section
@@ -201,6 +202,16 @@ export const translations = {
       note: 'Gratis en App Store y Google Play',
     },
 
+    // Privacy Policy
+    privacy: {
+      label: 'Legal',
+      title: 'Política de Protección de Datos',
+      subtitle: 'Braxs Global',
+      paragraph1: 'Braxs Global trata los datos personales conforme a la Ley 8968. Usamos sus datos únicamente para brindar nuestros servicios financieros, cumplir con la regulación y garantizar la seguridad de la plataforma.',
+      paragraph2: 'Usted puede solicitar acceso, corrección o eliminación de sus datos a través de gerencia@braxsglobal.com. Tomamos medidas de seguridad como cifrado, control de acceso y monitoreo permanente.',
+      paragraph3: 'Braxs no comparte datos excepto cuando es estrictamente necesario para operar o por orden de autoridad.',
+    },
+
     // Footer
     footer: {
       description: 'Braxs Global es una fintech moderna que simplifica tu vida financiera. Tu dinero, tu control.',
@@ -274,6 +285,7 @@ export const translations = {
       label: 'About Us',
       title: 'A financial platform made for you',
       description: 'Braxs Global is a modern fintech that issues cards and manages digital accounts for direct clients. No lines, no paperwork, no bureaucracy. We operate your money with security, speed and cutting-edge technology. You control everything from your Braxs app.',
+      legal: 'Braxs Global Consulting SRL, legal ID 3-102-841401, is a Costa Rican fintech that offers payment account services and prepaid cards. While the company is not registered with the General Superintendency of Financial Entities (SUGEF), it makes continuous efforts to comply with best practices in the financial sector. Braxs is not a supervised banking entity, nor does it offer a state guarantee on deposited funds.',
     },
 
     // Services Section
@@ -423,6 +435,16 @@ export const translations = {
       title: 'Download Braxs now',
       subtitle: 'Available for iOS and Android. Start controlling your money in minutes.',
       note: 'Free on App Store and Google Play',
+    },
+
+    // Privacy Policy
+    privacy: {
+      label: 'Legal',
+      title: 'Data Protection Policy',
+      subtitle: 'Braxs Global',
+      paragraph1: 'Braxs Global processes personal data in accordance with Law 8968. We use your data solely to provide our financial services, comply with regulations, and ensure platform security.',
+      paragraph2: 'You may request access, correction, or deletion of your data through gerencia@braxsglobal.com. We implement security measures such as encryption, access control, and continuous monitoring.',
+      paragraph3: 'Braxs does not share data except when strictly necessary to operate or by order of authorities.',
     },
 
     // Footer

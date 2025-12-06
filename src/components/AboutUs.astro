@@ -40,6 +40,21 @@ const t = getTranslations(lang);
           </div>
         </div>
       </div>
+
+      <div class="about__visual" data-animate="fade-left">
+        <img
+          src="/images/debit.png"
+          alt="Braxs Debit Card"
+          class="about__card"
+          width="400"
+          height="250"
+          loading="lazy"
+        />
+      </div>
+    </div>
+
+    <div class="about__legal" data-animate="fade-up">
+      <p>{t.about.legal}</p>
     </div>
   </div>
 </section>
@@ -52,9 +67,10 @@ const t = getTranslations(lang);
   }
 
   .about__container {
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-12);
+    align-items: center;
   }
 
   .about__content {
@@ -97,14 +113,74 @@ const t = getTranslations(lang);
     color: var(--gold-400);
   }
 
-  .about__badges {
+  .about__visual {
+    display: flex;
     justify-content: center;
+    align-items: center;
+  }
+
+  .about__card {
+    max-width: 100%;
+    height: auto;
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));
+    transition: transform var(--duration-normal) var(--ease-smooth);
+  }
+
+  .about__card:hover {
+    transform: scale(1.02);
+  }
+
+  .about__legal {
+    margin-top: var(--space-12);
+    padding: var(--space-6);
+    background: var(--bg-secondary);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+  }
+
+  .about__legal p {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    line-height: var(--leading-relaxed);
+    text-align: center;
+    margin: 0;
+  }
+
+  @media (max-width: 1024px) {
+    .about__container {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+
+    .about__badges {
+      justify-content: center;
+    }
+
+    .about__visual {
+      order: -1;
+    }
+
+    .about__card {
+      max-width: 300px;
+    }
   }
 
   @media (max-width: 640px) {
     .about__badges {
       flex-direction: column;
       align-items: center;
+    }
+
+    .about__card {
+      max-width: 250px;
+    }
+
+    .about__legal {
+      padding: var(--space-4);
+    }
+
+    .about__legal p {
+      font-size: var(--text-xs);
     }
   }
 </style>
