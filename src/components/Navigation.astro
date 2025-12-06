@@ -227,11 +227,19 @@ const otherLang = lang === 'es' ? 'en' : 'es';
   }
 
   @media (max-width: 768px) {
+    .nav {
+      padding: var(--space-3) var(--space-4);
+    }
+
+    .nav__container {
+      gap: var(--space-4);
+    }
+
     .nav__menu {
       display: none;
     }
 
-    .nav__actions .btn {
+    .nav__actions > :last-child {
       display: none;
     }
   }
