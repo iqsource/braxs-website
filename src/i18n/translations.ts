@@ -214,7 +214,7 @@ export const translations = {
       },
       contact: {
         title: 'Contacto',
-        email: 'soporte@braxsglobal.com',
+        email: 'gerencia@braxsglobal.com',
         phone: '+506 4001-1647',
         whatsapp: '+506 7158-8825',
       },
@@ -438,7 +438,7 @@ export const translations = {
       },
       contact: {
         title: 'Contact',
-        email: 'soporte@braxsglobal.com',
+        email: 'gerencia@braxsglobal.com',
         phone: '+506 4001-1647',
         whatsapp: '+506 7158-8825',
       },
