@@ -60,7 +60,7 @@ export const translations = {
       items: [
         {
           title: 'Tarjeta Braxs',
-          subtitle: 'Crédito o Prepago',
+          subtitle: 'Tarjeta Prepago Braxs',
           features: ['Virtual o física', 'Bloqueo instantáneo', 'Notificaciones en tiempo real', 'Seguridad avanzada', 'Compras internacionales'],
         },
         {
@@ -96,12 +96,12 @@ export const translations = {
     // Security Section
     security: {
       label: 'Seguridad',
-      title: 'Protección total para tu dinero',
-      description: 'Usamos tecnología antifraude, cifrado avanzado, autenticación biométrica y monitoreo 24/7 para mantener tu dinero siempre seguro.',
+      title: 'Tu seguridad es nuestra prioridad',
+      description: 'Implementamos altos estándares de seguridad para proteger tu información y transacciones: cifrado avanzado, autenticación biométrica, tecnología antifraude y monitoreo 24/7.',
       features: [
         {
-          title: 'Encriptación bancaria',
-          description: 'Tus datos protegidos con encriptación de alto nivel.',
+          title: 'Encriptación avanzada',
+          description: 'Protegemos tus datos con encriptación de alto nivel.',
         },
         {
           title: 'Tokenización de tarjeta',
@@ -295,7 +295,7 @@ export const translations = {
       items: [
         {
           title: 'Braxs Card',
-          subtitle: 'Credit or Prepaid',
+          subtitle: 'Braxs Prepaid Card',
           features: ['Virtual or physical', 'Instant blocking', 'Real-time notifications', 'Advanced security', 'International purchases'],
         },
         {
@@ -331,12 +331,12 @@ export const translations = {
     // Security Section
     security: {
       label: 'Security',
-      title: 'Total protection for your money',
-      description: 'We use anti-fraud technology, advanced encryption, biometric authentication and 24/7 monitoring to keep your money always safe.',
+      title: 'Your security is our priority',
+      description: 'We implement high security standards to protect your information and transactions: advanced encryption, biometric authentication, anti-fraud technology and 24/7 monitoring.',
       features: [
         {
-          title: 'Banking encryption',
-          description: 'Your data protected with bank-grade encryption.',
+          title: 'Advanced encryption',
+          description: 'We protect your data with high-level encryption.',
         },
         {
           title: 'Card tokenization',
