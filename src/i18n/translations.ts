@@ -83,7 +83,7 @@ export const translations = {
     // CTA Section
     cta: {
       title: 'Tu nueva vida financiera comienza hoy',
-      subtitle: 'Únete a miles de usuarios que ya disfrutan de una banca digital sin complicaciones.',
+      subtitle: 'Únete a miles de usuarios que ya disfrutan de una fintech sin complicaciones.',
       button: 'Crear mi cuenta Braxs',
       stats: {
         users: 'Usuarios activos',
@@ -100,7 +100,7 @@ export const translations = {
       features: [
         {
           title: 'Encriptación bancaria',
-          description: 'Tus datos protegidos con cifrado de grado bancario.',
+          description: 'Tus datos protegidos con encriptación de alto nivel.',
         },
         {
           title: 'Tokenización de tarjeta',
