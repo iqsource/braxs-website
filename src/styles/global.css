@@ -2,6 +2,10 @@
    BRAXS GLOBAL - GLOBAL STYLES
    ======================================== */
 
+/* @import must come first */
+@import './variables.css';
+@import './animations.css';
+
 /* Self-hosted fonts for performance */
 @font-face {
   font-family: 'Inter';
@@ -58,9 +62,6 @@
   font-display: swap;
   src: url('/fonts/plus-jakarta-sans-v12-latin-800.woff2') format('woff2');
 }
-
-@import './variables.css';
-@import './animations.css';
 
 /* ===== RESET ===== */
 *,
